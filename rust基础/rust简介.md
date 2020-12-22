@@ -1,12 +1,116 @@
 # Rust 简介
 
-Rust 是一门系统级别的通用的、多范式、编译型编程语言，与 C/C++类似。其运行速度理论上也与 C/C++同级，但不同的是 Rust 是线程安全的。Rust 更加强调安全性、并发性和内存的控制。Rust 语法上与 C/C++相似，但是 Rust 不允许空指针和悬挂指针，而这些都是导致系统崩溃、内存泄漏和不安全代码的根源，也是无数 C/C++从业者的噩梦。
+Rust 是一门系统级别的通用的、多范式、编译型编程语言,与 C/C++类似.其运行速度理论上也与 C/C++同级,但不同的是 Rust 是线程安全的.Rust 更加强调安全性、并发性和内存的控制.Rust 语法上与 C/C++相似,但是 Rust 不允许空指针和悬挂指针,而这些都是导致系统崩溃、内存泄漏和不安全代码的根源,也是无数 C/C++从业者的噩梦.
 
 # Rust 安装
 
-##### Windows 安装 Rust
+## Windows 安装 Rust
 
-1、从[官网](https://www.rust-lang.org/tools/install)下载安装包  
-![官网安装包下载](https://github.com/tonnywz/learn-rust/blob/master/%E5%9B%BE%E7%89%87/%E5%AE%98%E7%BD%91%E5%AE%89%E8%A3%85%E5%8C%85.jpg?raw=true)
-2、安装[Microsoft C++ 生成工具]  
-![Microsoft C++ 生成工具](https://github.com/tonnywz/learn-rust/blob/master/%E5%9B%BE%E7%89%87/Microsoft%20C++%20%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7.jpg?raw=true)
+1、从[官网](https://www.rust-lang.org/tools/install)下载对应的安装包  
+![官网安装包下载](https://github.com/tonnywz/learn-rust/blob/master/%E5%9B%BE%E7%89%87/%E5%AE%98%E7%BD%91%E5%AE%89%E8%A3%85%E5%8C%85.jpg?raw=true)  
+2、下载[Visual Studio](https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/)  
+![Visual Studio](https://github.com/tonnywz/learn-rust/blob/master/%E5%9B%BE%E7%89%87/Microsoft%20C++%20%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7.jpg?raw=true)  
+3、Visual Studio 界面选择安装**Microsoft C++ 生成工具**  
+![Microsoft C++ 生成工具](https://github.com/tonnywz/learn-rust/blob/master/%E5%9B%BE%E7%89%87/%E5%AE%89%E8%A3%85C++%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7.jpg?raw=true)
+
+## Linux、Mac OS 安装 Rust
+
+在终端执行
+
+```
+curl https://sh.rustup.rs -sSf | sh
+```
+
+出现 `Rust is installed now. Great!` 表示安装成功
+
+## 验证安装结果
+
+终端执行
+
+```
+
+rustc --version
+
+```
+
+如果打印出当前 rust 的版本则安装成功
+安装成功后会自动设置环境变量,重启终端后就可以正常使用了,如果不重启终端执行 `source $HOME/.cargo/env` 也可以直接使用
+
+## 版本更新
+
+```
+
+rustup update
+
+```
+
+## 卸载
+
+```
+
+rustup self uninstall
+
+```
+
+# 管理工具
+
+## rustc
+
+rustc 是 Rust 编程语言的编译器,用于将源代码和生产二进制代码,变成一个或可执行文件.
+
+## Cargo
+
+Cargo 是 Rust 的构建系统和包管理器,Cargo 会调用 rustc.类似于 node 的 npm,python 的 pip.可以使用 Cargo 来管理 Rust 项目,比如构建代码、下载依赖库并进行编译.
+
+# Hello, world!
+
+使用 cargo 创建一个 rust 项目
+
+```
+
+cargo new hello
+
+```
+
+进入项目
+
+```
+
+cd hello
+
+```
+
+直接执行
+
+```
+cargo run
+```
+
+运行结果会直接显示"Hello, world!",很惊喜对不对?  
+执行`cargo new`命令会直接生成一个初始化的项目.进入*hello*项目查看文件结构.在*hello*项目的根目录下会有会有一个 _src_ 文件夹还有 _Cargo.lock_ 以及 _Cargo.toml_ 等文件.
+
+## src
+
+src 目录用来存放我们以后要写的代码,*src/main.rs*是入口文件.
+
+## Cargo.toml
+
+_Cargo.toml_ 是一个 manifest(清单),描述项目的依赖,并由开发者手动编写.文件格式如下：
+
+```
+
+[package]
+name = "hello"
+version = "0.1.0"
+authors = ["xxx <xxxxxxxxxx@xxx.com>"]
+edition = "2018"
+[dependencies]
+
+```
+
+package 部分表示该项目的一些信息,其中 edition 地段指定是编译的版本,缺省情况下默认是 2015.
+dependencies 部分表示需要依赖的一些外部的包,这个会在以后的更新中详细介绍.
+
+## Cargo.lock
+
+_Cargo.lock_ 包含项目相关依赖项的确切信息,它由 Cargo 维护,不需要开发者对其进行编辑.据说这个是某些 rust 面试中的知识点,了解一下.
